@@ -1,0 +1,63 @@
+import example.*
+
+describe "punto 1"{
+	
+	test "agregar un suenio deberia agregarlo a la lista de pendientes"{
+	
+	const SerBombero = new RecibirseDe(carrera = "bombero")
+	const pepe = new Persona (profesion = "taxista", quiereEstudiar= "bombero")
+	pepe.agregarSuenio(SerBombero)
+	assert.equals(pepe.sueniosPendientes(),#{SerBombero})	
+	}
+		
+	
+	
+	test "no puede cumplir el suenio de recibirse si no desea estudiar  la carrera "{
+
+	const SerBombero = new RecibirseDe(carrera = "bombero")
+	const pepe = new Persona (profesion = "taxista", quiereEstudiar= "enfermeria")
+	pepe.cumplirSuenio(SerBombero)
+	assert.equals(pepe.sueniosPendientes(),#{SerBombero})	
+	}
+	
+	test "no puede cumplir el suenio de recibirse si ya está recibido de la carrera"{
+
+	const SerBombero = new RecibirseDe(carrera = "bombero")
+	const pepe = new Persona (profesion = "bombero", quiereEstudiar= "bombero")
+	pepe.cumplirSuenio(SerBombero)
+	assert.equals(pepe.sueniosPendientes(),#{SerBombero})	
+	}
+	
+	
+	
+	test "suenio: recibirse de algo "{
+
+	const SerBombero = new RecibirseDe(carrera = "bombero")
+	const pepe = new Persona (profesion = "taxista", quiereEstudiar= "bombero")
+	pepe.cumplirSuenio(SerBombero)
+	assert.equals(pepe.sueniosCumplidos(),#{SerBombero})	
+	}
+	
+	test "suenio: consigue el Trabajo que desea "{
+	
+	const trabajarComotester = new ConseguirTrabajo(remuneracion = 20000)
+	const pepe = new Persona (remuneracionPretendida = 10000)
+	
+	pepe.cumplirSuenio(trabajarComotester )
+	assert.equals(pepe.sueniosCumplidos(),#{trabajarComotester})	
+		
+	}
+	
+	test "suenio: no puede conseguir el trabajo porque pagan menos de lo que pretende"{
+	
+	const trabajarComotester = new ConseguirTrabajo(remuneracion = 5000)
+	const pepe = new Persona (remuneracionPretendida = 10000)
+	pepe.cumplirSuenio(trabajarComotester)
+	
+	assert.equals(pepe.sueniosPendientes(),#{trabajarComotester})
+//	assert.equals(pepe.sueniosCumplidos(),#{})	
+//	assert.equals(pepe.sueniosPendientes(),#{trabajarComotester})	
+		
+	}
+	
+}
